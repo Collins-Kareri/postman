@@ -1,4 +1,6 @@
-/*const { MongoClient, ObjectID } = require('mongodb');
+//import { Db } from "mongodb";
+
+const { MongoClient, ObjectID } = require('mongodb');
 
 const connectionURL = 'mongodb://127.0.0.1:27017';
 const databaseName = 'task-manager';
@@ -9,7 +11,7 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true }, (error, client) =>
     }
     const db = client.db(databaseName);
 
-    db.collection('users').findOne({ _id: new ObjectID("5e4fa31fa02d070e59606c74") },
+    /*db.collection('users').findOne({ _id: new ObjectID("5e4fa31fa02d070e59606c74") },
         (error, user) => {
             if (error) {
                 return console.log("Unable to fetch user");
@@ -25,3 +27,17 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true }, (error, client) =>
     });
 });
 */
+
+    db.collection('tasks').insertMany([{
+        description: 'Exercise',
+        completed: true
+    }, {
+        description: 'Watch prosports',
+        completed: false
+    }], (error, result) => {
+        if (error) {
+            return console.log('Unable to insert tasks');
+        }
+        console.log(result);
+    })
+});
